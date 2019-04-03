@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hinova.dao.ClassDao">
+	<resultMap type="Clazz" id="ClassResult">
+		<result property ="cid" column="id" />
+		<result property ="cname" column="name" />
+		<result property ="gradeid" column="grade_id" />
+		<result property ="editUser" column="edit_user_id" />
+		<result property ="createUser" column="create_user_id" />
+		<result property ="createTime" column="create_time" />
+		<result property ="editTime" column="edit_time" />
+		<result property ="isDelete" column="is_delete" />
+		<result property ="description" column="description" />
+		<association property="grade" javaType="Grade" column="grade_id">  
+            <id property ="gid" column="g_id" />
+			<result property ="gname" column="g_name" />
+        </association>  
+		<collection property="teacher" ofType="Teacher" column="id">
+			<id column="t_id" property="id"/><!-- 这里的column对应的是下面查询的别名，而不是表字段名 -->
+			<result column="t_name" property="name"/><!-- property对应JavaBean中的属性名 -->
+		</collection>
+		
+
+	</resultMap>
+	
+	<select id="list" parameterType="Map" resultMap="ClassResult">
+		 SELECT cl.id,cl.name,cl.description,cl.edit_user_id,cl.create_user_id,date_format(cl.edit_time, '%Y-%m-%d %H:%i:%s') as edit_time,date_format(cl.create_time, '%Y-%m-%d %H:%i:%s') as create_time, gr.id as g_id,gr.name as grade_id from nh_config_clazz cl LEFT JOIN nh_config_grade gr on cl.grade_id = gr.id WHERE cl.is_delete = '0'			
+		 <if test="start!=null and size!=null">
+				limit #{start},#{size}
+			</if>
+	 </select>
+	 <select id="listClazzByGradeId" parameterType="String" resultMap="ClassResult">
+	 	SELECT id from  nh_config_clazz where is_delete = '0'  and grade_id = #{gradeId}
+	 
+	 </select>
+	 <select id = "listClazz" parameterType="map"  resultMap = "ClassResult">
+		 SELECT id,name from  nh_config_clazz where is_delete = '0' 
+		 <if test ="gradeId !=null">
+		 	and grade_id = #{gradeId}
+		 </if>
+	 </select>
+	 
+	 
+	 <select id="getTotal" parameterType="Map" resultType="Integer">
+	 SELECT count(*) from nh_config_clazz cl LEFT JOIN nh_config_grade gr on cl.grade_id = gr.id WHERE cl.is_delete = '0'
+			<if test="start!=null and size!=null">
+				limit #{start},#{size}
+			</if>
+	 </select>
+	 
+	 <insert id="add" parameterType="Clazz">
+		INSERT INTO nh_config_clazz (id,name,grade_id,create_user_id,create_time,edit_time,is_delete,description) VALUES (null,#{cname},#{gradeid},#{createUser},SYSDATE(),SYSDATE(),'0',#{description})
+	 </insert>
+	<update id="edit" parameterType="Clazz">
+		update nh_config_clazz
+		<set>
+			<if test="cname!=null  ">
+				name=#{cname},
+			</if>
+			<if test="gradeid!=null  ">
+				grade_id=#{gradeid},
+			</if>
+			<if test="description!=null and description!=''  ">
+				description=#{description},
+			</if>
+			<if test="editUser!=null and editUser!=''  ">
+				edit_user_id=#{editUser},
+			</if>
+			edit_time= SYSDATE()
+		</set>
+		where id = #{cid}
+	</update>
+	<select id="findById" parameterType="Integer" resultMap="ClassResult">
+		SELECT cl.id,cl.name,cl.description,cl.edit_user_id,cl.edit_time,cl.create_user_id,cl.create_time, gr.id as g_id,gr.name as g_name from nh_config_clazz cl LEFT JOIN nh_config_grade gr on cl.grade_id = gr.id WHERE cl.is_delete = '0' and cl.id=#{id}
+	</select>
+	
+	<select id="findByName" parameterType="String" resultMap="ClassResult">
+		select * from nh_config_clazz where name=#{name}
+	</select>
+	<select id="findByNameOnGradeName" parameterType="Map" resultMap="ClassResult">
+	select cz.id,cz.`name` from nh_config_clazz cz left join nh_config_grade gr on cz.grade_id = gr.id
+	where cz.name = #{cname} and gr.name = #{gname}	</select>
+	<delete id="delete_class" parameterType="Integer">
+		delete from nh_config_clazz where id=#{id}
+	</delete>
+</mapper>

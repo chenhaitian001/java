@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hinova.dao.PatriarchDao">
+	<resultMap type="Patriarch" id="PatriarchResult">
+		<result property ="id" column="id" />
+		<result property ="name" column="name" />
+		<result property ="faceCode" column="face_code" />
+		<result property ="phone" column="phone" />
+		<result property ="email" column="email" />
+		<result property ="address" column="address" />
+		<result property ="relation" column="relation" />
+		<result property ="studentId" column="student_id" />
+		<result property ="editUser" column="edit_user_id" />
+		<result property ="createUser" column="create_user_id" />
+		<result property ="createTime" column="create_time" />
+		<result property ="editTime" column="edit_time" />
+		<result property ="isDelete" column="is_delete" />
+		<result property ="description" column="description" />
+		
+		<association property="student" javaType="Student" column="id">  
+            <id property ="id" column="st_id" />
+			<result property ="name" column="st_name" />
+        </association> 
+        
+         
+
+	</resultMap>
+		
+	
+	
+	<select id="list_Patriarch" parameterType="Map" resultMap="PatriarchResult">
+	SELECT ph.description,ph.id,ph.name,ph.phone,ph.email,ph.address,ph.relation,ph.face_code,ph.face_code,st.`name` as student_id,ph.create_user_id,date_format(ph.create_time, '%Y-%m-%d %H:%i:%s') as create_time,date_format(ph.edit_time, '%Y-%m-%d %H:%i:%s') as edit_time,ph.edit_user_id from td_config_patriarch ph LEFT JOIN td_config_student st on ph.student_id = st.id  WHERE ph.is_delete = '0'
+		 <if test="start!=null and size!=null">
+				limit #{start},#{size}
+			</if>
+	 </select>
+	 <select id="getPatriarchTotal" parameterType="Map" resultType="Integer">
+	 SELECT count(*) from td_config_patriarch  WHERE is_delete = '0'
+			<if test="start!=null and size!=null">
+				limit #{start},#{size}
+			</if>
+	 </select>
+	 
+	 <insert id="addPatriarch" parameterType="Patriarch">
+		INSERT INTO td_config_patriarch (id,name,phone,email,address,relation,face_code,student_id,create_user_id,create_time,edit_time,is_delete,description) VALUES (UUID(),'-',''),#{name},#{phone},#{email},#{address},#{relation},#{faceCode},#{studentId},#{createUser},SYSDATE(),SYSDATE(),'0',#{description})
+	 </insert>
+	<update id="editPatriarch" parameterType="Patriarch">
+		update td_config_patriarch
+		<set>
+			<if test="name!=null  ">
+				name=#{name},
+			</if>
+			<if test="studentId!=null  ">
+				student_id=#{studentId},
+			</if>
+			<if test="phone!=null  ">
+				phone=#{phone},
+			</if>
+			<if test="email!=null  ">
+				email=#{email},
+			</if>
+			<if test="address!=null  ">
+				address=#{address},
+			</if>
+			<if test="relation!=null  ">
+				relation=#{relation},
+			</if>
+			<if test="faceCode!=null  ">
+				face_code=#{faceCode},
+			</if>
+			<if test="description!=null and description!=''  ">
+				description=#{description},
+			</if>
+			<if test="editUser!=null and editUser!=''  ">
+				edit_user_id=#{editUser},
+			</if>
+			edit_time= SYSDATE()
+		</set>
+		where id = #{id}
+	</update>
+	<select id="findByPatriarchId" parameterType="String" resultMap="PatriarchResult">
+		SELECT ph.id,ph.name,ph.phone,ph.email,ph.address,ph.relation,ph.face_code,ph.student_id,ph.face_code,st.id as st_id,st.name as st_name from td_config_patriarch ph LEFT JOIN td_config_student st on ph.student_id = st.id
+ WHERE ph.is_delete = '0' and ph.id=#{id}
+	</select>
+	
+	<select id="findByPatriarchName" parameterType="String" resultMap="PatriarchResult">
+		select * from td_config_patriarch where name=#{name}
+	</select>
+	
+	<delete id="delete_Patriarch" parameterType="String">
+		delete from td_config_patriarch where id=#{id}
+	</delete>
+</mapper>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hinova.dao.EquipDao">
+	<resultMap type="Device" id="DeviceResult">
+		<result property ="location" column="location" />
+		<result property ="ip" column="ip" />
+		<result property ="sn" column="sn" />
+		<result property ="status" column="status" />
+		<result property ="editUser" column="edit_user_id" />
+		<result property ="createUser" column="create_user_id" />
+		<result property ="createTime" column="create_time" />
+		<result property ="editTime" column="edit_time" />
+		<result property ="isDelete" column="is_delete" />
+		<result property ="description" column="description" />
+	</resultMap>
+	<select id="list" parameterType="Map" resultMap="DeviceResult">
+		SELECT id,location,ip,sn,case status when '1' then '在线' else '离线' end as status,create_user_id,edit_user_id,date_format(edit_time, '%Y-%m-%d') as edit_time,description FROM nh_config_device
+		<if test="start!=null and size!=null">
+				limit #{start},#{size}
+		</if>
+	</select>
+	<select id="getTotal" parameterType="Map" resultType="Integer">
+	select count(*) from nh_config_device 
+		<if test="start!=null and size!=null">
+				limit #{start},#{size}
+		</if>
+	</select>
+	<insert id="add" parameterType="Device">
+		INSERT INTO nh_config_device  (id,location,sn,status,create_user_id,create_time,edit_time,description) VALUES (null,#{location},#{sn},0,#{createUser},SYSDATE(),SYSDATE(),#{description}) 
+	</insert>
+	<update id="edit" parameterType="Device">
+		update nh_config_device
+		<set>
+			<if test="location!=null  ">
+				location=#{location},
+			</if>
+			<if test="sn!=null  ">
+				sn=#{sn},
+			</if>
+			<if test="description!=null and description!=''  ">
+				description=#{description},
+			</if>
+			<if test="editUser!=null and editUser!=''  ">
+				edit_user_id=#{editUser},
+			</if>
+			    edit_time= SYSDATE()
+		</set>
+		where id = #{id}
+	</update>
+	<select id="findbyId" parameterType="Integer" resultMap="DeviceResult">
+		select id,location,ip,sn,case status when '1' then '在线' else '离线' end as status,create_user_id,edit_user_id,edit_time,description from nh_config_device where id=#{id}
+	</select>
+	
+	<select id="findByName" parameterType="String" resultMap="DeviceResult">
+		select * from nh_config_device where name=#{location}
+	</select>
+	
+	<delete id="delete_device" parameterType="Integer">
+		delete from nh_config_device where id=#{id}
+	</delete>
+</mapper>

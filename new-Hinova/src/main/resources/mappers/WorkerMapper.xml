@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hinova.dao.WorkerDao">
+	<resultMap type="Teacher" id="TeacherResult">
+		<result property ="id" column="id" />
+		<result property ="name" column="name" />
+		<result property ="phone" column="phone" />
+		<result property ="email" column="email" />
+		<result property ="address" column="address" />
+		
+		<result property ="provinces" column="provinces" />
+		<result property ="cities" column="cities" />
+		<result property ="counties" column="counties" />
+		<result property ="addressDetial" column="address_detial" />
+		<result property ="number" column="number" />
+		<result property ="gender" column="gender" />
+		<result property ="agencyNumber" column="agency_number" />
+		<result property ="worker" column="worker" />
+		<result property ="code" column="code" />
+		<result property ="birthday" column="birthday" />
+		<result property ="nationality" column="nationality" />
+		<result property ="preschoolEducation" column="preschool_education" />
+		<result property ="cardType" column="card_type" />
+		<result property ="preschoolTeachers" column="preschool_teachers" />
+		<result property ="idCard" column="id_card" />
+		<result property ="teacherPc" column="teacher_pc" />
+		<result property ="pHm" column="p_h_m" />
+		<result property ="title" column="title" />
+		<result property ="politicalLandscape" column="political_landscape" />
+		<result property ="schooling" column="schooling" />
+		<result property ="volk" column="volk" />
+		<result property ="teacherPcType" column="teacher_pc_type" />
+		<result property ="residenceTyp" column="residence_typ" />
+		<result property ="issuing" column="issuing" />
+		<result property ="residence" column="residence" />
+		<result property ="teacherPcNo" column="teacher_pc_no" />
+		<result property ="placeBirth" column="place_birth" />
+		<result property ="compileType" column="compile_type" />
+		<result property ="workerType" column="worker_type" />
+		<result property ="ifJob" column="if_job" />
+		<result property ="employingWay" column="employing_way" />
+		
+		<result property ="editUser" column="edit_user_id" />
+		<result property ="createUser" column="create_user_id" />
+		<result property ="createTime" column="create_time" />
+		<result property ="editTime" column="edit_time" />
+		<result property ="isDelete" column="is_delete" />
+		<result property ="description" column="description" />
+		<result property = "clazzid" column="clazz_id"/>
+		<result property = "gradeid" column="grade_id"/>
+		
+		<association property="clazz" javaType="Clazz" column="cid">  
+            <id property ="cid" column="cid" />
+			<result property ="cname" column="cname" />
+        </association>  
+
+		<association property="grade" javaType="Grade" column="gid">  
+            <id property ="gid" column="gid" />
+			<result property ="gname" column="gname" />
+        </association> 
+	</resultMap>
+	
+	<select id="list" parameterType="Map" resultMap="TeacherResult">
+		 SELECT tr.id,tr.name,tr.phone,tr.email,tr.address,tr.edit_user_id,tr.create_user_id,
+		 date_format(tr.create_time, '%Y-%m-%d %H:%i:%s') as create_time,date_format(tr.edit_time, '%Y-%m-%d %H:%i:%s') as edit_time,tr.description,gr.name as grade_id,cz.name as clazz_id from nh_config_teacher tr left join nh_config_grade gr on tr.grade_id = gr.id LEFT JOIN 
+     nh_config_clazz cz on tr.clazz_id= cz.id	
+		 <if test="start!=null and size!=null">
+				limit #{start},#{size}
+			</if>
+	 </select>
+	 <select id="getTotal" parameterType="Map" resultType="Integer">
+	 SELECT count(*) from nh_config_teacher where is_delete = '0'
+			<if test="start!=null and size!=null">
+				limit #{start},#{size}
+			</if>
+	 </select>
+	 
+	 <insert id="add" parameterType="Teacher">
+		INSERT INTO nh_config_teacher (id,
+		provinces,cities,counties,address_detial,number,gender,agency_number,worker,code,birthday,nationality,preschool_education
+		,card_type,preschool_teachers,id_card,teacher_pc,p_h_m,title,political_landscape,schooling,volk,teacher_pc_type
+		,residence_typ,issuing,residence,teacher_pc_no,place_birth,compile_type,worker_type,if_job,employing_way,
+		
+		name,clazz_id,phone,email,address,grade_id,create_user_id,create_time,edit_time,is_delete,description) 
+		
+		VALUES (null,
+		#{provinces},#{cities},#{counties},#{addressDetial},#{number},#{gender},#{agencyNumber},#{worker},#{code},#{birthday},#{nationality},#{preschoolEducation},
+		#{cardType},#{preschoolTeachers},#{idCard},#{teacherPc},#{pHm},#{title},#{politicalLandscape},#{schooling},#{volk},#{teacherPcType},
+		#{residenceTyp},#{issuing},#{residence},#{teacherPcNo},#{placeBirth},#{compileType},#{workerType},#{ifJob},#{employingWay},
+		#{name},#{clazzid},#{phone},#{email},#{address},#{gradeid},#{createUser},SYSDATE(),SYSDATE(),'0',#{description})
+	 </insert>
+	<update id="edit" parameterType="Teacher">
+		update nh_config_teacher
+		<set>
+			<if test="name!=null  ">
+				name=#{name},
+			</if>
+			<if test="clazzid!=null  ">
+				clazz_id=#{clazzid},
+			</if>
+			<if test="phone!=null  ">
+				phone=#{phone},
+			</if>
+			<if test="email!=null  ">
+				email=#{email},
+			</if>
+			<if test="address!=null  ">
+				address=#{address},
+			</if>
+			
+			<if test="provinces!=null  ">
+				provinces=#{provinces},
+			</if>
+			<if test="cities!=null  ">
+				cities=#{cities},
+			</if>
+			<if test="counties!=null  ">
+				counties=#{counties},
+			</if>
+			<if test="addressDetial!=null  ">
+				address_detial=#{addressDetial},
+			</if>
+			<if test="number!=null  ">
+				number=#{number},
+			</if>
+			<if test="gender!=null  ">
+				gender=#{gender},
+			</if>
+			<if test="agencyNumber!=null  ">
+				agency_number=#{agencyNumber},
+			</if>
+			<if test="worker!=null  ">
+				worker=#{worker},
+			</if>
+			<if test="code!=null  ">
+				code=#{code},
+			</if>
+			<if test="birthday!=null  ">
+				birthday=#{birthday},
+			</if>
+			<if test="nationality!=null  ">
+				nationality=#{nationality},
+			</if>
+			<if test="preschoolEducation!=null  ">
+				preschool_education=#{preschoolEducation},
+			</if>
+			<if test="cardType!=null  ">
+				card_type=#{cardType},
+			</if>
+			<if test="preschoolTeachers!=null  ">
+				preschool_teachers=#{preschoolTeachers},
+			</if>
+			<if test="idCard!=null  ">
+				id_card=#{idCard},
+			</if>
+			<if test="teacherPc!=null  ">
+				teacher_pc=#{teacherPc},
+			</if>
+			<if test="pHm!=null  ">
+				p_h_m=#{pHm},
+			</if>
+			<if test="title!=null  ">
+				title=#{title},
+			</if>
+			<if test="politicalLandscape!=null  ">
+				political_landscape=#{politicalLandscape},
+			</if>
+			<if test="schooling!=null  ">
+				schooling=#{schooling},
+			</if>
+			<if test="volk!=null  ">
+				volk=#{volk},
+			</if>
+			<if test="teacherPcType!=null  ">
+				teacher_pc_type=#{teacherPcType},
+			</if>
+			<if test="residenceTyp!=null  ">
+				residence_typ=#{residenceTyp},
+			</if>
+			<if test="issuing!=null  ">
+				issuing=#{issuing},
+			</if>
+			<if test="residence!=null  ">
+				residence=#{residence},
+			</if>
+			<if test="teacherPcNo!=null  ">
+				teacher_pc_no=#{teacherPcNo},
+			</if>
+			<if test="placeBirth!=null  ">
+				place_birth=#{placeBirth},
+			</if>
+			<if test="compileType!=null  ">
+				compile_type=#{compileType},
+			</if><if test="workerType!=null  ">
+				worker_type=#{workerType},
+			</if>
+			<if test="ifJob!=null  ">
+				if_job=#{ifJob},
+			</if>
+			<if test="employingWay!=null  ">
+				employing_way=#{employingWay},
+			</if>
+			
+			
+			<if test="gradeid!=null  ">
+				grade_id=#{gradeid},
+			</if>
+			<if test="description!=null and description!=''  ">
+				description=#{description},
+			</if>
+			<if test="editUser!=null and editUser!=''  ">
+				edit_user_id=#{editUser},
+			</if>
+			edit_time= SYSDATE()
+		</set>
+		where id = #{id}
+	</update>
+	<select id="findById" parameterType="Integer" resultMap="TeacherResult">
+			SELECT cl.provinces,cl.cities,cl.counties,cl.address_detial,cl.number,cl.gender,cl.agency_number,cl.worker,cl.code,cl.birthday,cl.nationality,cl.preschool_education
+,cl.card_type,cl.preschool_teachers,cl.id_card,cl.teacher_pc,cl.p_h_m,cl.title,cl.political_landscape,cl.schooling,cl.volk,cl.teacher_pc_type
+,cl.residence_typ,cl.issuing,cl.residence,cl.teacher_pc_no,cl.place_birth,cl.compile_type,cl.worker_type,cl.if_job,cl.employing_way,clz.name as cname,clz.id as cid,grd.name as gname,grd.id as gid,cl.id,cl.name,cl.clazz_id,cl.phone,cl.email,cl.address,cl.grade_id,cl.description,cl.edit_user_id,cl.edit_time,cl.create_user_id,cl.create_time from nh_config_teacher cl LEFT JOIN nh_config_clazz clz on cl.clazz_id=clz.id LEFT JOIN nh_config_grade grd on cl.grade_id= grd.id WHERE cl.is_delete = '0'   
+  and cl.id=#{id}
+	</select>
+	
+	<select id="findByName" parameterType="String" resultMap="TeacherResult">
+		select * from nh_config_teacher where name=#{name}
+	</select>
+	
+	<delete id="delete_teacher" parameterType="Integer">
+		delete from nh_config_teacher where id=#{id}
+	</delete>
+</mapper>

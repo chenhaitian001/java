@@ -1,0 +1,119 @@
+html{
+    height: 100%;
+}
+body{
+    height: 97%;
+    background: #eaf0f6;
+}
+a:hover, a:focus{
+    color: #fff;
+}
+/* 头部样式 */
+.headCon{
+    width: 100%;
+    overflow: visible;
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+.head{
+    min-width: 1349px;
+    background-color: #2a4b5e;
+}
+.loge{
+    float: left;
+    margin: 10px 15px 0 20px;
+}
+.loge img{
+    width: 166px;
+    height: 47px;
+}
+.nav{
+    float: left;
+}
+.nav li{
+    float: left;
+    line-height: 62px;
+    font-size: 15px;
+    color: rgba(255,255,255,0.5);
+    margin: 0 15px;
+    border-bottom: 6px solid #2a4b5e;
+    cursor: pointer;
+}
+.nav li:hover{
+    color: #fff;
+    border-bottom: 6px solid #54b3b2;
+}
+.nav .active{
+    color: #fff;
+    border-bottom: 6px solid #54b3b2;
+}
+.headRight{
+    float: right;
+    margin-right: 20px;
+}
+.headRight li{
+    float: left;
+    height: 68px;
+    line-height: 68px;
+    margin-right: 30px;
+    cursor: pointer;
+}
+.headRight li:nth-child(3){
+    margin-right: 0;
+}
+.headRight .pic1{
+    width: 42px;
+    height: 42px;
+}
+.headRight .pic2{
+    width: 10px;
+    height: 6px;
+}
+.headRight .pic3{
+    width: 25px;
+    height: 25px;
+}
+.headRight .pic4{
+    width: 24px;
+    height: 25px;
+}
+.subNav{
+   width: 100%; 
+}
+.subNav ul{
+    min-width: 1349px;
+    padding-left: 54px;
+    background: #3c637a;
+}
+.subNav li{
+    float: left;
+    line-height: 40px;
+    color: rgba(234,240,246,0.5);
+    font-size: 15px;
+    padding: 0 18px;
+    background: #3c637a;
+    cursor: pointer;
+}
+.subNav li:hover{
+    background: #31586e;
+    color: #fff;
+}
+.subNav .active{
+    background: #31586e;
+    color: #fff;
+}
+/* 头部结束 */
+
+/* wrapper start */
+.mainCon{
+    width: 96%;
+    height: 86%;
+    overflow: hidden;
+    padding: 12px 24px;
+    background: #fff;
+    border-radius: 5px;
+    margin: 5px auto 0
+}
+

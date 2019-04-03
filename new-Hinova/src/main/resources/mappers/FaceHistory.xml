@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hinova.dao.FaceHistoryDao">
+	<resultMap type="FaceHistory" id ="FaceHistoryResult">
+	<result property = "id" column = "id" />
+	<result property = "deviceLocation" column = "device_location" />
+	<result property = "devcieSN" column = "device_sn" />
+	<result property = "patriarchId" column = "patriarch_id" />
+	<result property = "patriarchName" column = "patriarch_name" />
+	<result property = "patriarchPhone" column = "patriarch_phone" />
+	<result property = "patriarchRelation" column = "patriarch_relation" />
+	<result property = "patriarchPhoto" column = "patriarch_photo" />
+	<result property = "studentId" column = "student_id" />
+	<result property = "studentName" column = "student_name" />
+	<result property = "studentGradeName" column = "student_grade_name" />
+	<result property = "studentClazzName" column = "student_clazz_name" />
+	<result property = "teacherName" column = "teacher_name" />
+	<result property = "teacherPhone" column = "teacher_phone" />
+	<result property = "year" column = "year" />
+	<result property = "month" column = "month" />
+	<result property = "week" column = "week" />
+	<result property = "day" column = "day" />
+	<result property = "faceTime" column = "face_time" />
+	<result property = "facePhoto" column = "face_photo" />
+	<result property = "isDelete" column = "is_delete" />
+	</resultMap>
+	
+	<select id="list" parameterType="Map" resultMap="FaceHistoryResult">
+		 SELECT * from tf_analyze_face_history
+		<where>
+			<if test="date1!=null and date1!='' ">
+			and face_time &gt; #{date1}
+			</if>
+			<if test="date2!=null and date2!=''">
+			and face_time &lt; #{date2}
+			</if>
+			<if test="code!=null and code!=''">
+			<![CDATA[ and (patriarch_name like concat('%',#{code},'%')  or patriarch_phone =#{code}) ]]>
+			</if>
+		</where>
+		order by id desc
+			<if test="start!=null and size!=null">
+				limit #{start},#{size}
+			</if>
+	 </select>
+	<select id="getTotal" parameterType="Map" resultType="Integer">
+	 	select count(*) from tf_analyze_face_history
+	 	<where>
+	 		<if test="date1!=null and date1!=''">
+	 		and face_time &gt; #{date1}
+	 		</if>
+	 		<if test="date2!=null and date2!=''">
+	 		and face_time &lt; #{date2}
+	 		</if>
+	 		<if test="code!=null and code!=''">
+			<![CDATA[ and (patriarch_name like concat('%',#{code},'%')  or patriarch_phone =#{code}) ]]>
+			</if>
+	 	</where>
+	 </select>
+	 <select id="list_last" parameterType="Map" resultMap="FaceHistoryResult">
+		 SELECT * from tf_analyze_face_history where face_time = (SELECT MAX(face_time) from tf_analyze_face_history)
+			<if test="start!=null and size!=null">
+				limit #{start},#{size}
+			</if>
+	 </select>
+</mapper>

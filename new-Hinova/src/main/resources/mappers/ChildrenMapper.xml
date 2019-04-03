@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hinova.dao.ChildrenDao">
+	<resultMap type="Student" id="StudentResult">
+		<result property ="id" column="id" />
+		<result property ="name" column="name" />
+		<result property ="sex" column="sex" />
+		<result property ="organizeId" column="organize_id" />
+		<result property ="birthday" column="birthday" />
+		<result property ="goSchoolTime" column="go_school_time" />
+		<result property ="clazzId" column="clazz_id" />
+		<result property ="gradeId" column="grade_id" />
+		<result property ="keeper" column="keeper" />
+		<result property ="keeperPhone" column="keeper_phone" />
+		<result property ="address" column="address" />
+		<result property ="provinces" column="provinces" />
+		<result property ="cities" column="cities" />
+		<result property ="counties" column="counties" />
+		<result property ="addressDetial" column="address_detial" />
+		<result property ="describes" column="describes" />
+		<result property ="englishName" column="english_name" />
+		<result property ="volk" column="volk" />
+		<result property ="nationality" column="nationality" />
+		<result property ="cardType" column="card_type" />
+		<result property ="residenceTyp" column="residence_typ" />
+		<result property ="residence" column="residence" />
+		<result property ="idCard" column="id_card" />
+		<result property ="physicalExamination" column="physical_examination" />
+		<result property ="physicalBook" column="physical_book" />
+		<result property ="healthyBook" column="healthy_book" />
+		<result property ="physicalHistory" column="physical_history" />
+		<result property ="allergy" column="allergy" />
+		<result property ="defensive" column="defensive" />
+		<result property ="specialMatter" column="special_matter" />
+		
+		<result property ="physicalHistoryMark" column="physicalHistory_Mark" />
+		<result property ="allergyMark" column="allergy_Mark" />
+		<result property ="defensiveMark" column="defensive_Mark" />
+		
+		<result property ="editUser" column="edit_user_id" />
+		<result property ="createUser" column="create_user_id" />
+		<result property ="createTime" column="create_time" />
+		<result property ="editTime" column="edit_time" />
+		<result property ="isDelete" column="is_delete" />
+		<result property ="description" column="description" />
+		<result property ="volk" column="volk" />
+		
+		<association property="clazz" javaType="Clazz" column="clazz_id">  
+            <id property ="cid" column="c_id" />
+			<result property ="cname" column="c_name" />
+        </association> 
+        
+         
+		<collection property="patriarch" ofType="Patriarch" column="id">
+			<id column="pa_id" property="id"/><!-- 这里的column对应的是下面查询的别名，而不是表字段名 -->
+			<result column="pa_name" property="name"/><!-- property对应JavaBean中的属性名 -->
+		</collection>
+
+
+	</resultMap>
+
+	<resultMap type="OutPutStudent" id="OutPutStudentResult">
+		<result property ="id" column="id" />
+		<result property ="name" column="name" />
+		<result property ="sex" column="sex" />
+		<result property ="organizeId" column="organize_id" />
+		<result property ="birthday" column="birthday" />
+		<result property ="goSchoolTime" column="go_school_time" />
+		<result property ="clazzId" column="clazz_id" />
+		<result property ="gradeId" column="grade_id" />
+		<result property ="keeper" column="keeper" />
+		<result property ="keeperPhone" column="keeper_phone" />
+		<result property ="provinces" column="provinces" />
+		<result property ="cities" column="cities" />
+		<result property ="counties" column="counties" />
+		<result property ="address" column="address" />
+	</resultMap>
+	<select id="listExport" parameterType="Map" resultMap="OutPutStudentResult">
+select	st.id,st.name,st.sex,st.organize_id,st.birthday,st.go_school_time,st.keeper,st.keeper_phone
+			,st.address ,st.provinces,st.cities ,st.counties ,st.volk ,  
+	gr.name as grade_id,cl.name as clazz_id  from td_config_student st LEFT JOIN nh_config_clazz cl on st.clazz_id = cl.id LEFT JOIN nh_config_grade gr on st.grade_id = gr.id where st.is_delete = '0'
+			 <if test="start!=null and size!=null">
+				limit #{start},#{size}
+			</if>
+	 </select>
+	<select id="listGradeClazzbyStudent" parameterType="Integer" resultMap="StudentResult">
+		select st.id,st.clazz_id,st.grade_id  from td_config_student st where st.id = #{id} and st.is_delete = '0'
+	</select>  
+	<select id="list" parameterType="Map" resultMap="StudentResult">
+	select st.id,st.name,st.sex,gr.name as grade_id,cl.name as clazz_id ,st.keeper,st.keeper_phone,st.go_school_time,
+	st.describes from td_config_student st LEFT JOIN nh_config_clazz cl on st.clazz_id = cl.id LEFT JOIN nh_config_grade gr on st.grade_id = gr.id where st.is_delete = '0'
+		 <if test="start!=null and size!=null">
+				limit #{start},#{size}
+			</if>
+	 </select>
+	 <select id="listLeave" parameterType="Map" resultMap="StudentResult">
+	select st.id,st.name,st.sex,gr.name as grade_id,cl.name as clazz_id ,st.keeper,st.keeper_phone,st.go_school_time,
+	st.describes from td_config_student st LEFT JOIN nh_config_clazz cl on st.clazz_id = cl.id LEFT JOIN nh_config_grade gr on st.grade_id = gr.id where st.is_delete = '1'
+		 <if test="start!=null and size!=null">
+				limit #{start},#{size}
+			</if>
+	 </select>
+	 <select id="getTotal" parameterType="Map" resultType="Integer">
+	 SELECT count(*) from td_config_student  WHERE is_delete = '0'
+			<if test="start!=null and size!=null">
+				limit #{start},#{size}
+			</if>
+	 </select>
+	 
+	 <insert id="add" parameterType="Student">
+		INSERT INTO td_config_student 
+			( id,name,sex ,organize_id ,birthday ,go_school_time ,clazz_id ,grade_id,keeper,keeper_phone 
+			,address ,provinces,cities ,counties ,address_detial ,describes,english_name ,volk ,nationality ,residence
+			 ,card_type,residence_typ ,id_card,physical_examination ,physical_book ,healthy_book,physical_history,allergy,defensive ,special_matter
+			,create_user_id,edit_user_id ,create_time ,edit_time ,description,physicalHistory_Mark,allergy_Mark,defensive_Mark,is_delete)
+			VALUES 
+			(UUID(),'-',''), #{name}, #{sex}, #{organizeId}, #{birthday}, #{goSchoolTime}, #{clazzId}, #{gradeId}, #{keeper}, #{keeperPhone}
+			, #{address}, #{provinces}, #{cities}, #{counties}, #{addressDetial}, #{describes}, #{englishName}, #{volk}, #{nationality}, #{residence}
+			, #{cardType}, #{residenceTyp}, #{idCard}, #{physicalExamination}, #{physicalBook}, #{healthyBook}, #{physicalHistory}, #{allergy}, #{defensive}, #{specialMatter}
+			, #{createUser}, #{editUser}, SYSDATE(),SYSDATE(), #{description},#{physicalHistoryMark},#{allergyMark},#{defensiveMark},#{isDelete});
+	 </insert>
+	<update id="upClazz"  parameterType="Student">
+	  update td_config_student
+		<set>
+		<if test="isDelete!=null  ">
+				is_delete=#{isDelete},
+			</if>
+			<if test="ClazzId!=null  ">
+				clazz_id=#{ClazzId},
+			</if>
+		
+		</set>
+		where id = #{id}
+	</update>
+	<update id="edit" parameterType="Student">
+		update td_config_student
+		<set>
+			<if test="name!=null  ">
+				name=#{name},
+			</if>
+			
+			<if test="sex!=null  ">
+				sex=#{sex},
+			</if>
+			<if test="organizeId!=null  ">
+				organize_id=#{organizeId},
+			</if>
+			<if test="birthday!=null  ">
+				birthday=#{birthday},
+			</if>
+			<if test="goSchoolTime!=null  ">
+				go_school_time=#{goSchoolTime},
+			</if>
+			<if test="clazzId!=null  ">
+				clazz_id=#{clazzId},
+			</if>
+			<if test="gradeId!=null  ">
+				grade_id=#{gradeId},
+			</if>
+			<if test="keeper!=null  ">
+				keeper=#{keeper},
+			</if>
+			<if test="keeperPhone!=null  ">
+				keeper_phone=#{keeperPhone},
+			</if>
+			<if test="address!=null  ">
+				address=#{address},
+			</if>
+			<if test="provinces!=null  ">
+				provinces=#{provinces},
+			</if>
+			
+			<if test="cities!=null  ">
+				cities=#{cities},
+			</if>
+			<if test="counties!=null  ">
+				counties=#{counties},
+			</if>
+			<if test="addressDetial!=null  ">
+				address_detial=#{addressDetial},
+			</if>
+			<if test="describes!=null  ">
+				describes=#{describes},
+			</if>
+			<if test="englishName!=null  ">
+				english_name=#{englishName},
+			</if>
+			<if test="volk!=null  ">
+				volk=#{volk},
+			</if>
+			<if test="nationality!=null  ">
+				nationality=#{nationality},
+			</if>
+			<if test="residence!=null  ">
+				residence=#{residence},
+			</if>
+			<if test="cardType!=null  ">
+				card_type=#{cardType},
+			</if>
+			<if test="residenceTyp!=null  ">
+				residence_typ=#{residenceTyp},
+			</if>
+			<if test="idCard!=null  ">
+				id_card=#{idCard},
+			</if>
+			<if test="physicalExamination!=null  ">
+				physical_examination=#{physicalExamination},
+			</if>
+			<if test="physicalBook!=null  ">
+				physical_book=#{physicalBook},
+			</if>
+			<if test="healthyBook!=null  ">
+				healthy_book=#{healthyBook},
+			</if>
+			<if test="physicalHistory!=null  ">
+				physical_history=#{physicalHistory},
+			</if>
+			<if test="allergy!=null  ">
+				allergy=#{allergy},
+			</if>
+			<if test="defensive!=null  ">
+				defensive=#{defensive},
+			</if>
+			<if test="specialMatter!=null  ">
+				special_matter=#{specialMatter},
+			</if>
+			
+			<if test="physicalHistoryMark!=null and physicalHistoryMark!=''  ">
+				physicalHistory_Mark=#{physicalHistoryMark},
+			</if>
+			<if test="allergyMark!=null and allergyMark!=''  ">
+				allergy_Mark=#{allergyMark},
+			</if>
+			<if test="defensiveMark!=null and defensiveMark!=''  ">
+				defensive_Mark=#{defensiveMark},
+			</if>
+			<if test="description!=null and description!=''  ">
+				description=#{description},
+			</if>
+			<if test="editUser!=null and editUser!=''  ">
+				edit_user_id=#{editUser},
+			</if>
+			edit_time= SYSDATE()
+		</set>
+		where id = #{id}
+	</update>
+	<select id="findById" parameterType="String" resultMap="StudentResult">
+	select st.id,st.name,st.sex,st.organize_id,st.birthday,st.go_school_time,st.keeper,st.keeper_phone
+			,st.address ,st.provinces,st.cities ,st.counties ,st.address_detial ,st.describes,st.english_name ,st.volk ,st.nationality ,st.residence
+			 ,st.card_type,st.residence_typ ,st.id_card,st.physical_examination ,st.physical_book ,st.healthy_book,st.physical_history,st.allergy,st.defensive ,st.special_matter
+	,gr.id as grade_id,cl.id as clazz_id ,st.keeper,st.keeper_phone,st.go_school_time,st.describes
+	,st.physicalHistory_Mark,st.allergy_Mark,st.defensive_Mark from td_config_student st LEFT JOIN nh_config_clazz cl on st.clazz_id = cl.id LEFT JOIN nh_config_grade gr on st.grade_id = gr.id 
+WHERE  st.id=#{id}
+	</select>
+	
+	<select id="findByName" parameterType="String" resultMap="StudentResult">
+		select * from td_config_student where name=#{name} and is_delete = '0'
+	</select>
+	<select id="listStudent" resultMap="StudentResult">
+		select id,name from td_config_student where  is_delete = '0'
+	</select>
+	<delete id="delete_student" parameterType="String">
+		delete from td_config_student where id=#{id}
+	</delete>
+</mapper>

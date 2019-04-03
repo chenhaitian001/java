@@ -1,0 +1,68 @@
+﻿﻿
+/* CSS Document */
+html {
+    font-family: 'Microsoft Yahei', Helvetica Neue, Arial, serif;
+    background-color: #fff !important;
+}
+/* 全局统一字号大小为14px，颜色为#444 BEGIN------ woky 2016.11.22 */
+body, h1, h2, h3, h4, h5, h6, hr, p,  dl, dt, dd, ul, ol, li, form, fieldset, button, input, textarea, th, td {
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+body,h1,h2,h3,h4,h5,h6,hr,p,dl,dt,dd,li,fieldset,button,div,span,a,label,input,select,option,textarea {
+    font-family: 'Microsoft Yahei', Helvetica Neue, Arial, serif;
+    font-size: 14px;
+}
+*{
+    box-sizing: border-box;
+}
+/* 全局统一字号大小为14px，颜色为#333 END------ */
+em {
+    font-style: normal;
+}
+i{
+    font-style: normal;
+}
+ul, ol, li {
+    list-style: none;
+}
+a {
+    text-decoration: none !important;
+}
+a:hover {
+    text-decoration: none;
+}
+img {
+    border: 0;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 0;
+}
+
+.clearfix:after {
+    display: block;
+    overflow: hidden;
+    clear: both;
+    height: 0;
+    visibility: hidden;
+    content: ".";
+}
+.clearfix {
+    *zoom: 1;
+}
+
+input, select {
+    vertical-align: middle;
+    outline: none;
+    border: none;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px white inset;
+}
+
+/*————————本页面公共样式——————————*/
+

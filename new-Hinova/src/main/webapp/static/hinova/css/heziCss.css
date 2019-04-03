@@ -1,0 +1,328 @@
+/*清除默认属性*/
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+}
+
+body {
+	overflow-x: hidden;
+    width: 1000px;
+    background-color: #f9f9f9;
+}
+.title{
+    width: 100%;
+    height:50px;
+   font-size: 18px;
+   font-family: 微软雅黑;
+    background-color: #53B3B1;
+    color: #f9f9f9;
+    line-height: 50px;
+    padding-left: 40px;
+}
+.hrLins{
+    text-align: center;
+    margin-top: 5px;
+}
+/* 横线加文字 */
+.hrLine{
+    vertical-align:middle; display:inline-block;
+    border-bottom: 1px dotted #CCC;
+    width: 100px;
+    text-align: center;
+    font-family: 微软雅黑;
+}
+.main{
+    overflow-x: hidden;
+    width:100%;
+    height: 100%;
+}
+.box1 {
+    width:1000px;
+    height: 50px;
+   margin-top: 5px;
+}
+.box2 {
+    width:1000px;
+    height: 50px;
+    margin-top: 20px;
+}
+.box3 {
+    width:1000px;
+    height: 130px;
+    margin-top: 20px;
+}
+.title_left_name{
+    width: 130px;
+    line-height:50px;
+    font-size: 15px;
+    font-family: 微软雅黑;
+    text-align-last: right;
+    float: left;
+    margin-left: 60px;
+}
+.title_right_name{
+    width: 170px;
+    line-height:50px;
+    font-size: 15px;
+    font-family: 微软雅黑;
+    text-align-last: right;
+    float: left;
+}
+.box1_left{
+    width: 50%;
+    float:left;
+    margin-top: 5px;
+}
+.box1_right{
+    width: 40%;
+    float:left;
+    margin-top: 5px;
+    margin-left: 30px;
+}
+/*只带一条下划线*/
+.box1_line{
+    border-bottom: 1px solid #c6c6c6;
+    border-top:0px;
+    border-left:0px;
+    border-right:0px;
+    float: left;
+    width: 100px;
+    height: 25px;
+    margin-top:10px;
+}
+
+.box1_input{
+	 border-radius:4px;
+    border:1px solid #676869;
+    color:#000000;
+    float: left;
+    height: 30px;
+    margin-top: 9px;
+    margin-left: 10px;
+    border-radius:4px;
+}
+.input2{
+	 border-radius:4px;
+    border:1px solid #676869;
+    color:#000000;
+     float: left;
+    height: 30px;
+     width: 200px;
+     margin-left: 10px;
+     margin-top: 9px;
+    border-radius:4px;
+}
+.input3{
+	 border-radius:4px;
+    border:1px solid #676869;
+    color:#000000;
+    float: left;
+    height: 30px;
+    width: 234px;
+    margin-left: 10px;
+    margin-top: 9px;
+    border-radius:4px;
+}
+.input4{
+	 border-radius:4px;
+    border:1px solid #676869;
+    color:#000000;
+    float: left;
+    height: 40px;
+    width: 656px;
+    margin-left: 10px;
+    margin-top: 9px;
+    border-radius:4px;
+}
+/*复选框*/
+
+.gcs-checkbox {
+
+    display: none;
+    float: left;
+
+
+}
+
+.gcs-checkbox+label {
+    margin-top: 14px;
+    background-color: white;
+
+    border-radius: 0px;
+
+    width: 20px;
+
+    height: 20px;
+
+    display: inline-block;
+
+    text-align: center;
+
+    vertical-align: bottom;
+
+    line-height: 20px;
+    border-radius: 50%;
+    border: 1px solid gray;
+}
+
+.gcs-checkbox+label:hover {
+
+    cursor: pointer;
+
+    border: 1px solid #53b3b1;
+
+}
+
+.gcs-checkbox:checked+label {
+
+    background-color: #eee;
+
+    background: #53b3b1;
+
+}
+
+.gcs-checkbox:checked+label:after {
+
+    content: "\2714";
+
+    color: white;
+
+}
+/*单选按钮*/
+
+.gcs-radio {
+
+    display: none;
+    float: left;
+}
+
+.gcs-radio+label {
+    margin-top: 14px;
+    width: 20px;
+
+    height: 20px;
+
+    line-height: 20px;
+
+    display: inline-block;
+
+    text-align: center;
+
+    vertical-align: bottom;
+
+    border: 1px solid gray;
+
+    border-radius: 50%;
+
+}
+
+.gcs-radio+label:hover {
+
+    border: 1px solid #2783FB;
+
+    cursor: pointer;
+
+}
+
+.gcs-radio:checked+label {
+
+    background: #53b3b1;
+
+    border: 1px solid #2783FB;
+
+}
+
+.gcs-radio:checked+label:after {
+
+    content: "\2022";
+
+    font-size: 35px;
+
+    color: white;
+
+}
+.db_left{
+    float: right;
+    width: 60px;
+    margin-left: 5px;
+    margin-top: 15px;
+}
+.db_left_beizhu{
+    float: left;
+    width: 60px;
+    margin-left: 5px;
+    margin-top: 12px;
+}
+.box1_left_line{
+    margin-top: 1px;
+    margin-left: 190px;
+    background-color: #FF0000;
+}
+.box1_right_line{
+    margin-top: 1px;
+    margin-left: 0px;
+    background-color: #FF0000;
+}
+.box1_left_inline{
+    float: left;
+    margin-left: 8px;
+    margin-top: 1px;
+
+}
+/*按钮样式*/
+.registerBtn{
+    width: 50px; /* 宽度 */
+    height: 30px; /* 高度 */
+    border-width: 0px; /* 边框宽度 */
+    border-radius: 3px; /* 边框半径 */
+    background: #53b3b1; /* 背景颜色 */
+    cursor: pointer; /* 鼠标移入按钮范围时出现手势 */
+    outline: none; /* 不显示轮廓线 */
+    font-family: Microsoft YaHei; /* 设置字体 */
+    color: white; /* 字体颜色 */
+    font-size: 17px; /* 字体大小 */
+    margin-top: 10px;
+	margin-bottom:15px;
+}
+
+select{
+    -web-kit-appearance:none;
+    -moz-appearance: none;
+    margin-top: 9px;
+    margin-left: 10px;
+    border-radius:4px;
+    border:1px solid #676869;
+    color:#000000;
+    outline:0;
+    width:149px  ! important;
+    height:30px  ! important;
+}
+/* combox去除原始样式下拉框
+ */
+.textbox-text, .validatebox-text ,.validatebox-readonly{
+	border-radius:4px;
+    border:1px solid #676869;
+    color:#000000;
+	background-color: #ffffff;
+    background-image: none !important;
+    filter: none !important;
+    outline: none;
+	margin-left: 0px;
+    margin-right: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    height: 30px ! important; 
+    width: 67px ! important; 
+    margin-top: 9px ! important; 
+    margin-left: 10px ! important; 
+}
+.combobox-item {
+background-color: #eaf0f6;
+    background-image: none !important;
+    filter: none !important;
+    border: 1px solid #000000;
+    outline: none;
+    height: 25px !important;
+    line-height: 25px;
+}
