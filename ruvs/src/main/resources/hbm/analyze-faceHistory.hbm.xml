@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="cn.com.hinova.ruvs.analyze.bean">
+	<class name="FaceHistory" table="tf_analyze_face_history">
+		<id name="id" length="50">
+			<generator class="uuid" />
+		</id>
+		<property name="deviceLocation" column="device_location"  type="string" length="100" />
+		<property name="devcieSN" column="device_sn"  type="string" length="50" />
+
+		<property name="patriarchId" column="patriarch_id" type="string" length="50" />
+		<property name="patriarchName" column="patriarch_name"  type="string"  length="50"/>
+		<property name="patriarchPhone" column="patriarch_phone"  type="string"  length="50"/>
+		<property name="patriarchRelation" column="patriarch_relation"  type="string" length="50" />
+		<property name="patriarchPhoto" column="patriarch_photo"  type="string"  length="100"/>
+
+		<property name="studentId" column="student_id"  type="string" length="50" />
+		<property name="studentName" column="student_name"  type="string"  length="50"/>
+		<property name="studentGradeName" column="student_grade_name"  type="string"  length="50"/>
+		<property name="studentClazzName" column="student_clazz_name"  type="string"  length="50"/>
+		<property name="teacherName" column="teacher_name"  type="string" length="50" />
+		<property name="teacherPhone" column="teacher_phone"  type="string"  length="50"/>
+
+		<property name="year"  type="int" />
+		<property name="month"  type="int" />
+		<property name="week"  type="int" />
+		<property name="day"  type="int" />
+		<property name="faceTime" column="face_time"  type="timestamp" />
+		<property name="facePhoto" column="face_photo"  type="string"  length="100"/>
+        <property name="isDelete" type="integer" column="is_delete" not-null="true" ></property>
+
+
+
+	</class>
+
+
+</hibernate-mapping>

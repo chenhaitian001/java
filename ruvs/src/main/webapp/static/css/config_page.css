@@ -1,0 +1,56 @@
+html,body{
+	height:100%;
+}
+
+
+#search_area{
+	background: #F4F4F4;
+	padding:10px 10px;
+}
+
+#search_area>span{
+	display:inline-block;
+	margin:5px;
+}
+
+.edit_area{
+}
+.edit_area li{
+	padding:10px 10px 10px 80px;
+}
+.edit_area li:hover{
+	background-color: #FEFFC8;
+}
+
+.edit_area li .text{
+	width:80px;
+	display:inline-block;
+	font-weight: bolder;
+	font-size:14px;
+	vertical-align: top;
+}
+
+.edit_area li .value input,.edit_area li .value select{
+	width:240px;
+}
+
+
+.edit_area li .value textarea{
+	width:357px;
+	height:129px;
+}
+.edit_area li .rule{
+	font-size:0.6em;
+	color:#A8A6A5;
+	vertical-align: bottom;
+}
+.edit_area li .rule .red{
+	color:red;
+}
+
+.edit_area .error{
+	padding:0px;
+	padding-left:168px;
+	color:red;
+}
+

@@ -1,0 +1,10 @@
+eclipse.preferences.version=1
+encoding//src/main/java=UTF-8
+encoding//src/main/java/cn/com/hinova/ruvs/analyze/bean/FaceHistory.java=UTF-8
+encoding//src/main/java/cn/com/hinova/ruvs/henuo/controller/InputExcelController.java=UTF-8
+encoding//src/main/java/cn/com/hinova/ruvs/henuo/controller/MapresearchController.java=UTF-8
+encoding//src/main/java/cn/com/hinova/ruvs/henuo/controller/StudentController.java=UTF-8
+encoding//src/main/resources=UTF-8
+encoding//src/main/webapp/WEB-INF/jsp/analyze/face_history.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/jsp/config/input_excel.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/jsp/config/leave_st.jsp=UTF-8

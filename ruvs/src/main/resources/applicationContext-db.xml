@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+			http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context-3.0.xsd
+			http://www.springframework.org/schema/aop
+			http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+			http://www.springframework.org/schema/tx
+			http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+			
+	<context:component-scan base-package="cn.com.hinova.ruvs">
+ 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+    
+
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:/jdbc.properties" />
+	</bean>
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="maxActive" value="1000" />
+		<property name="maxWait" value="1000" />
+		<property name="poolPreparedStatements" value="true" />
+		<property name="defaultAutoCommit" value="true" />
+		<property name="removeAbandoned" value="true" />
+		<property name="logAbandoned" value="true" />
+		<property name="minEvictableIdleTimeMillis" value="10" />
+		<property name="removeAbandonedTimeout" value="5" />
+	</bean>
+
+<!-- <prop key="hibernate.connection.release_mode">  
+  after_transaction  
+</prop>  -->
+
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		 <property name="dataSource" ref="dataSource" /> 
+		<property name="configLocation" value="classpath:hibernate.cfg.xml"></property>
+		
+	</bean>
+
+
+	
+
+	<!-- 配置事务管理器 -->
+	<bean id="transaction" class="org.springframework.orm.hibernate3.HibernateTransactionManager" >
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<tx:advice id="txAdice" transaction-manager="transaction">
+		<tx:attributes>
+			<tx:method name="*" propagation="REQUIRED" rollback-for="Exception"/>
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:config  proxy-target-class="true" >
+		<aop:pointcut id="poincutd" expression="execution(* cn.com.hinova..service..*.*(..))" />
+		<aop:advisor pointcut-ref="poincutd" advice-ref="txAdice" />
+	</aop:config>
+	
+	
+	
+  <!--<bean id="xfireAop" class="cn.com.hinova.hcp.common.inteceptor.LogoInteceptor">
+  </bean>
+  <aop:config proxy-target-class="true">
+  		<aop:aspect ref="xfireAop">	
+  			<aop:pointcut id="notifyChange" expression="execution(public * cn.dx..service..*(..))"/>
+  			<aop:before pointcut-ref="notifyChange" method="logger"/>
+  		</aop:aspect>
+  </aop:config>-->
+	
+</beans>

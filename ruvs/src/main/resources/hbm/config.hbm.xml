@@ -1,0 +1,170 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="cn.com.hinova.ruvs.config.bean">
+
+    <class name="Clazz" table="td_config_clazz">
+		<id name="id" length="50">
+			<generator class="uuid" />
+		</id>
+
+		<property name="name" not-null="true" type="string" />
+
+        <many-to-one class="Grade" name="grade" update="true" not-found="ignore"  >
+            <column name="grade_id" />
+        </many-to-one>
+
+        <!--<one-to-one name="teacher"  property-ref="clazz" ></one-to-one>-->
+
+        <set name="teacherSet" lazy="false" >
+            <key column="clazz_id"></key>
+            <one-to-many class="cn.com.hinova.ruvs.config.bean.Teacher"></one-to-many>
+        </set>
+
+
+		<many-to-one class="cn.com.hinova.ruvs.sys.bean.User" name="createUser" update="false" not-found="ignore" >
+			<column name="create_user_id" />
+		</many-to-one>
+		<many-to-one class="cn.com.hinova.ruvs.sys.bean.User" name="editUser" not-found="ignore" >
+			<column name="edit_user_id" />
+		</many-to-one>
+		<property name="createTime" column="create_time" not-null="true" type="timestamp"  update="false"/>
+		<property name="editTime" column="edit_time" not-null="true" type="timestamp" />
+		<property name="isDelete" type="integer" column="is_delete" not-null="true"></property>
+		<property name="description" type="string" />
+
+	</class>
+
+	<class name="Grade" table="td_config_grade">
+		<id name="id" length="50">
+			<generator class="uuid" />
+		</id>
+
+		<property name="name" type="string" not-null="true" />
+
+
+		<many-to-one class="cn.com.hinova.ruvs.sys.bean.User" name="createUser" update="false" not-found="ignore" >
+			<column name="create_user_id" />
+		</many-to-one>
+		<many-to-one class="cn.com.hinova.ruvs.sys.bean.User" name="editUser" not-found="ignore" >
+			<column name="edit_user_id" />
+		</many-to-one>
+		<property name="createTime" column="create_time" not-null="true" type="timestamp"  update="false"/>
+		<property name="editTime" column="edit_time" not-null="true" type="timestamp" />
+		<property name="isDelete" type="integer" column="is_delete" not-null="true"></property>
+		<property name="description" type="string" />
+
+	</class>
+
+	<class name="Patriarch" table="td_config_patriarch">
+		<id name="id" length="50">
+			<generator class="uuid" />
+		</id>
+
+		<property name="name" type="string" not-null="true" />
+        <property name="phone" type="string"  />
+        <property name="email" type="string"  length="100"/>
+        <property name="address" type="string"  length="260"/>
+        <property name="relation" type="string" length="50" />
+        <property name="faceCode" column="face_code" type="string" length="50" not-null="true" unique="true"/>
+        <property name="resuData" column="resu_data" type="string"  length="16777215"/>
+
+        <many-to-one name="student" column="student_id" class="Student" not-found="ignore"></many-to-one>
+
+
+
+		<many-to-one class="cn.com.hinova.ruvs.sys.bean.User" name="createUser" update="false" not-found="ignore" >
+			<column name="create_user_id" />
+		</many-to-one>
+		<many-to-one class="cn.com.hinova.ruvs.sys.bean.User" name="editUser" not-found="ignore" >
+			<column name="edit_user_id" />
+		</many-to-one>
+		<property name="createTime" column="create_time" not-null="true" type="timestamp" update="false" />
+		<property name="editTime" column="edit_time" not-null="true" type="timestamp" />
+		<property name="isDelete" type="integer" column="is_delete" not-null="true"></property>
+		<property name="description" type="string" />
+
+
+	</class>
+
+    <class name="Student" table="td_config_student">
+        <id name="id" length="50">
+            <generator class="uuid" />
+        </id>
+        <property name="name" type="string" not-null="true" />
+
+        <many-to-one name="clazz" column="clazz_id" not-found="ignore" not-null="true"></many-to-one>
+
+        <set name="patriarchSet" >
+            <key column="student_id"/>
+            <one-to-many class="Patriarch"></one-to-many>
+        </set>
+
+        <many-to-one class="cn.com.hinova.ruvs.sys.bean.User" name="createUser" update="false" not-found="ignore" >
+            <column name="create_user_id" />
+        </many-to-one>
+
+        <many-to-one class="cn.com.hinova.ruvs.sys.bean.User" name="editUser" not-found="ignore" >
+            <column name="edit_user_id" />
+        </many-to-one>
+
+        <property name="createTime" column="create_time" not-null="true" type="timestamp" update="false" />
+        <property name="editTime" column="edit_time" not-null="true" type="timestamp" />
+        <property name="description" type="string" />
+        <property name="isDelete" column="is_delete" type="integer"/>
+    </class>
+
+    <class name="Teacher" table="td_config_teacher">
+        <id name="id" length="50">
+            <generator class="uuid" />
+        </id>
+
+        <property name="name" type="string" not-null="true" />
+        <property name="phone" type="string"/>
+        <property name="email" type="string" />
+        <property name="address" type="string" />
+
+        <many-to-one name="clazz" column="clazz_id" unique="true" not-found="ignore" not-null="true"></many-to-one>
+
+        <many-to-one class="cn.com.hinova.ruvs.sys.bean.User" name="createUser" update="false" not-found="ignore" >
+            <column name="create_user_id" />
+        </many-to-one>
+
+        <many-to-one class="cn.com.hinova.ruvs.sys.bean.User" name="editUser" not-found="ignore" >
+            <column name="edit_user_id" />
+        </many-to-one>
+
+        <property name="createTime" column="create_time" not-null="true" type="timestamp" update="false" />
+        <property name="editTime" column="edit_time" not-null="true" type="timestamp" />
+        <property name="description" type="string" />
+        <property name="isDelete" column="is_delete" type="integer"/>
+    </class>
+
+
+
+    <class name="Device" table="td_config_device">
+        <id name="id" length="50">
+            <generator class="uuid" />
+        </id>
+
+        <property name="location" type="string" not-null="true" />
+        <property name="ip" type="string" />
+        <property name="sn" type="string" not-null="true"/>
+        <property name="status" type="int" not-null="true"/>
+
+
+        <many-to-one class="cn.com.hinova.ruvs.sys.bean.User" name="createUser" update="false" not-found="ignore" >
+            <column name="create_user_id" />
+        </many-to-one>
+
+        <many-to-one class="cn.com.hinova.ruvs.sys.bean.User" name="editUser" not-found="ignore" >
+            <column name="edit_user_id" />
+        </many-to-one>
+
+        <property name="createTime" column="create_time" not-null="true" type="timestamp" update="false" />
+        <property name="editTime" column="edit_time" not-null="true" type="timestamp" />
+        <property name="description" type="string" />
+        <property name="isDelete" column="is_delete" type="integer"/>
+    </class>
+
+</hibernate-mapping>

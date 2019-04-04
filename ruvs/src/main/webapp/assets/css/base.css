@@ -1,0 +1,28 @@
+﻿/* CSS reset@ */
+html,body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td,a{font-size:14px;padding:0;margin:0;}
+table {border-collapse: collapse;border-spacing:0;}
+del, ins {text-decoration:none;}
+fieldset, img {border:0;}
+body,button,textarea{font:14px/1.6 Arial,"Microsoft YaHei";color:#333;}
+input,select{font:12px/1.6 Arial,"Microsoft YaHei";color:#333;}
+input,select,img{vertical-align:middle;}
+input,select{outline:none;}
+select{height:22px;line-height:18px;padding:2px;}
+ul,ol{list-style:none;}
+h1, h2, h3, h4, h5, h6 {font-size:14px;font-weight:400;}
+address,cite,dfn,em,var{font-style:normal;}
+legend{display:none;}
+td{font-size:14px;line-height:140%;}
+label{margin:0 0 0 5px;cursor:pointer;}
+input::-moz-focus-inner,button::-moz-focus-inner{border:0;padding:0;}
+.left{float:left;}
+.right{float:right;}
+.mt10{margin-top:10px;}
+.mt15{margin-top:15px;}
+.mt20{margin-top:20px;}
+a{color:#0c73b7;text-decoration:none;}
+a:hover{color:#ff6a00;text-decoration:none;}
+.txthide{text-indent:-999em;overflow:hidden;line-height:0;font-size:0}
+.clearfix:after{content:"";height:0;visibility:hidden;display:block;clear:both;}
+.clearfix{zoom:1;}
+.clear{clear:both;height:0;overflow:hidden;}

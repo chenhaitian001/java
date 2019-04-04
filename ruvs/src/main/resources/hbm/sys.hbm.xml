@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="cn.com.hinova.ruvs.sys.bean">
+	<class name="User" table="td_user">
+		<id name="id" length="50">
+			<generator class="uuid" />
+		</id>
+		<property name="loginName" column="login_name" not-null="true" type="string" />
+		<property name="showName" column="show_name" not-null="true" type="string" />
+		<property update="false" name="password" not-null="true" type="string" />
+		<property name="type" not-null="true" type="integer" />
+		<property name="phone" type="string" />
+		<property name="email" type="string" />
+		<property name="address" type="string" />
+		<many-to-one class="cn.com.hinova.ruvs.sys.bean.User" name="createUser" update="false" not-found="ignore">
+			<column name="create_user_id" />
+		</many-to-one>
+		<many-to-one class="cn.com.hinova.ruvs.sys.bean.User" name="editUser" not-found="ignore">
+			<column name="edit_user_id" />
+		</many-to-one>
+		<property name="createTime" column="create_time" not-null="true" type="timestamp"  update="false"/>
+		<property name="editTime" column="edit_time" not-null="true" type="timestamp" />
+		<property name="isDelete" type="integer" column="is_delete" not-null="true"></property>
+		<property name="description" type="string" />
+
+		<many-to-one class="Role" name="role" not-found="ignore">
+			<column name="role_id" />
+		</many-to-one>
+	</class>
+
+
+	<class name="Role" table="td_role">
+		<id name="id" length="50">
+			<generator class="uuid" />
+		</id>
+		<property name="name" type="string" not-null="true" />
+		<many-to-one class="cn.com.hinova.ruvs.sys.bean.User" name="createUser" update="false" not-found="ignore">
+			<column name="create_user_id" />
+		</many-to-one>
+		<many-to-one class="cn.com.hinova.ruvs.sys.bean.User" name="editUser" not-found="ignore">
+			<column name="edit_user_id" />
+		</many-to-one>
+		<property name="createTime" column="create_time" not-null="true" type="timestamp"  update="false"/>
+		<property name="editTime" column="edit_time" not-null="true" type="timestamp" />
+		<property name="isDelete" type="integer" column="is_delete" not-null="true"></property>
+		<property name="description" type="string" />
+
+		<set name="resources" table="tr_role_resource" lazy="true">
+			<key column="role_id"/>
+			<many-to-many class="Resource" column="resource_id" />
+		</set>
+	</class>
+
+
+	<class name="Resource" table="td_resource">
+		<id name="id" length="50">
+			<generator class="uuid" />
+		</id>
+		<property name="name" type="string" not-null="true" />
+		<property name="type" type="integer" not-null="true" />
+		<property name="url" type="string" not-null="true" />
+		<property name="icon" type="string"/>
+		<property name="status" type="integer" not-null="true" />
+		<property name="sort" type="integer" not-null="true" />
+		<many-to-one class="cn.com.hinova.ruvs.sys.bean.User" name="createUser" update="false" not-found="ignore">
+			<column name="create_user_id" />
+		</many-to-one>
+		<many-to-one class="cn.com.hinova.ruvs.sys.bean.User" name="editUser" not-found="ignore">
+			<column name="edit_user_id" />
+		</many-to-one>
+		<property name="createTime" column="create_time" not-null="true" type="timestamp" update="false" />
+		<property name="editTime" column="edit_time" not-null="true" type="timestamp" />
+		<property name="isDelete" type="integer" column="is_delete" not-null="true"></property>
+		<property name="description" type="string" />
+
+		<many-to-one name="parent"  class="Resource" not-found="ignore">
+			<column name="parent_id"></column>
+		</many-to-one>
+
+		<set name="roles" table="tr_role_resource" lazy="true" inverse="true">
+			<key column="resource_id"/>
+			<many-to-many class="Role" column="role_id" />
+		</set>
+
+		<set name="childs" inverse="true" >
+			<key column="parent_id"/>
+			<one-to-many class="Resource" />
+		</set>
+	</class>
+	
+	
+
+	<class name="Dict" table="td_dict">
+		<id name="id" length="50">
+			<generator class="uuid" />
+		</id>
+		<property name="name" type="string" not-null="true" />
+		<property name="value" type="string" not-null="true" />
+
+		<many-to-one class="cn.com.hinova.ruvs.sys.bean.User" name="createUser" update="false" not-found="ignore">
+			<column name="create_user_id" />
+		</many-to-one>
+
+		<many-to-one class="cn.com.hinova.ruvs.sys.bean.User" name="editUser" not-found="ignore">
+			<column name="edit_user_id" />
+		</many-to-one>
+
+		<property name="createTime" column="create_time" not-null="true" type="timestamp" update="false" />
+		<property name="editTime" column="edit_time" not-null="true" type="timestamp" />
+		<property name="description" type="string" />
+		<property name="isDelete" column="is_delete" type="integer"/>
+		<many-to-one name="parent"  class="Dict" not-found="ignore">
+			<column name="parent_id"></column>
+		</many-to-one>
+
+		<set name="childs" inverse="true" >
+			<key column="parent_id"/>
+			<one-to-many class="Dict" />
+		</set>
+	</class>
+
+</hibernate-mapping>

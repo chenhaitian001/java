@@ -1,0 +1,47 @@
+# encoding = utf8
+
+#系统名称
+site.name=幼儿园访客系统
+
+#超级管理员登录账号
+admin.superadmin.loginname=sadmin
+#超级管理员显示名称
+admin.superadmin.showname=S管理员
+
+
+
+#监测的IP信息
+server.ip=0.0.0.0
+
+#监测的端口——用于设备上传数据
+server.port=9900
+
+#心跳包端口，用于判断设备在线状态
+server.udp.port=9904
+
+#数据传输使用的编码，，汉王设备使用的GBK编码
+io.encoding=GBK
+
+#设备离线状态超时时间——此时间间隔内，没有心跳包，确认设备离线
+device.outtime=35
+
+#基础数据重新加载时间，到达此时间，则重新加载基础数据
+data.config.reload.outtime=30
+
+
+#任务执行时间，按照此时间粒度执行巡检任务
+tesk.cront.deviceStatus=0/30 * * * * ?
+
+
+#删除比较早的照片 每天凌晨1点1分1秒检查过去图片删除
+tesk.cront.deleteOldPhotoFile=1 1 1 * * ?
+
+#更新设备时间 - 每个小时的1分1秒钟手，同步设备时间
+tesk.cront.setDeviceTime=1 1 * * * ?
+
+#图片保存的天数
+photo.saveTimeForDay=365
+
+
+jms.url=tcp://manman.ren:61616
+jms.queue=queue.winxin.sends
