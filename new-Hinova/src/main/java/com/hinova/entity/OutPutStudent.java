@@ -4,7 +4,7 @@ import cn.afterturn.easypoi.excel.annotation.Excel;
 
 public class OutPutStudent {
 	@Excel(name = "学生编号", orderNum = "0")
-    private Integer id;
+    private String id;
 	@Excel(name = "姓名", orderNum = "1")
 	private String name;
 	@Excel(name = "性别",replace = {"男_1", "女_0"}, orderNum = "2")
@@ -99,10 +99,10 @@ public class OutPutStudent {
 	public void setOrganizeId(String organizeId) {
 		this.organizeId = organizeId;
 	}
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	
