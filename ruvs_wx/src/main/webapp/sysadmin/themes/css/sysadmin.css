@@ -1,0 +1,286 @@
+@charset "utf-8";
+
+.tab_title {
+	margin-top: 10px;
+}
+
+.tab_title h1 {
+	font-size: 14px;
+	margin-bottom: 0px;
+}
+
+.tab_title2 {
+	margin-top: 0px;
+}
+
+.tab_title2 h1 {
+	font-size: 14px;
+	border-bottom: 1px solid #ccc;
+}
+
+.row_line1 {
+	width: 100%;
+}
+
+th {
+	text-align: center;
+}
+
+.bidOnlineLive {
+	
+}
+
+.bidOnlineLive table {
+	
+}
+
+.bidOnlineLive table p {
+	margin: 0px;
+	padding: 0px 0px;
+	width: 140px;
+}
+
+.bidOnlineLive table tr {
+	height: 20px;
+}
+
+.tab_top {
+	
+}
+
+.tab_top tr {
+	height: 20px;
+}
+
+.borderDott {
+	display: block;
+	line-height: 21px;
+	float: left;
+	border-bottom: 1px dotted #999;
+	min-height: 21px;
+}
+
+.thc {
+	TEXT-ALIGN: center;
+}
+
+.thr {
+	TEXT-ALIGN: right;
+}
+
+.thl {
+	TEXT-ALIGN: left;
+}
+
+.tdc {
+	TEXT-ALIGN: center;
+}
+
+.tdr {
+	TEXT-ALIGN: right;
+	padding-top: 1px;
+}
+
+.tdl {
+	TEXT-ALIGN: left;
+	padding-top: 1px;
+}
+
+._gray {
+	color: gray;
+}
+
+input.requiredNoCheck, textarea.requiredNoCheck {
+	background: url("../default/images/form/input_bg.png") no-repeat;
+	background-position: 100% 0;
+}
+
+span.requiredNoCheck, select.requiredNoCheck {
+	background: url("../default/images/form/input_bg.png") no-repeat;
+	background-position: 100% 0;
+}
+
+input.limitNumber, textarea.limitNumber {
+	text-align: right;
+}
+
+input.numberRight, textarea.numberRight {
+	text-align: right;
+}
+
+table.list td div {
+	line-height: 21px;
+}
+
+input.limitWidth {
+	width: 50px;
+}
+
+input.bidWidth {
+	width: 100px;
+}
+
+.texthidden {
+	width: 200px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	border: 1px solid #ddd;
+}
+
+.tableWrap {
+	table-layout: fixed;
+}
+
+.tdWrap {
+	word-break: break-all;
+	word-wrap: break-word;
+	overflow: hidden;
+	/*width:300px;*/
+}
+
+.tabs_table {
+	width: 100%;
+	border-collapse: collapse;
+	border: solid 0px;
+	line-height: 21px;
+	padding-top: 2px;
+}
+
+.tabs_table td {
+	line-height: 21px;
+}
+
+table.list2 {
+	border-collapse: collapse;
+	border: solid 1px #ededed;
+}
+
+table.list2  thead tr {
+	background: url("../default/images/grid/tableth.png") repeat-x scroll 0
+		0 #F0EFF0;
+}
+
+table.list2 th {
+	padding: 1px 2px;
+	line-height: 21px;
+	border-right: solid 1px #D0D0D0;
+	border-bottom: solid 1px #D0D0D0;
+	font-weight: bolder;
+}
+
+table.list2 td {
+	padding: 1px 2px;
+	line-height: 21px;
+	border-right: solid 1px #ededed;
+	text-align: center;
+}
+
+table.list2 th.asc, .grid .gridHeader th.asc {
+	background-position: 100% 0;
+	background: url(../default/images/order_up.gif) no-repeat right;
+	cursor: pointer;
+}
+
+table.list2 th.desc, .grid .gridHeader th.desc {
+	background-position: 100% 0;
+	background: url(../default/images/order_down.gif) no-repeat right;
+	cursor: pointer;
+}
+
+table.list2 tbody {
+	background-color: #fff;
+}
+
+table.list2 .right {
+	text-align: right;
+}
+
+table.list2 .trbg {
+	background-color: #F8F8F8;
+}
+
+table.list2 .hot {
+	background-color: #fff5c0;
+}
+
+table.list2 .hover {
+	background-color: #e4f5ff;
+}
+
+table.list2 .selected {
+	background-color: #7cc5e5;
+	border-color: #b8d0d6;
+}
+
+table.list2 a {
+	color: #3C7FB1;
+	font-size: 11px;
+	line-height: 20px;
+}
+
+table.list2 a:hover {
+	text-decoration: underline;
+	line-height: 20px;
+}
+
+table.list2 td span.error {
+	z-index: -1
+}
+
+table.nowrap2 tbody tr {
+	border-bottom: solid 1px #ededed;
+}
+
+.tabHeadBg {
+	background: url("../default/images/grid/tableth.png") repeat-x scroll 0
+		0 #F0EFF0;
+}
+
+input.requiredNoCheck, textarea.requiredNoCheck {
+	background: url("../default/images/form/input_bg.png") no-repeat;
+	background-position: 100% 0;
+}
+
+span.requiredNoCheck, select.requiredNoCheck {
+	background: url("../default/images/form/input_bg.png") no-repeat;
+	background-position: 100% 0;
+}
+
+.disabled {
+	color: #888888;
+}
+
+#healMuliDiv {
+	
+}
+
+#healMuliDiv dl {
+	width: 1024px;
+	height: 50px;
+}
+
+#healMuliDiv dl dd {
+	width: 80%;
+}
+
+#healMuliDiv1 {
+	
+}
+
+#healMuliDiv1 dl {
+	position: static;
+	width: 1024px;
+	height: 50px;
+}
+
+#healMuliDiv1 dl dd {
+	width: 80%;
+}
+
+#checkboxlistId {
+	float: none;
+	width: inherit;
+	padding: auto;
+	line-height: 21px;
+}

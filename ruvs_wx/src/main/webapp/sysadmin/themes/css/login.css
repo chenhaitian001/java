@@ -1,0 +1,229 @@
+@charset "utf-8";
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
+	blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn,
+	em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup,
+	tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table,
+	caption, tbody, tfoot, thead, tr, th, td {
+	padding: 0;
+	margin: 0;
+	font-size: 12px;
+	line-height: 100%;
+	font-family: Arial, sans-serif;
+	text-decoration: none
+}
+
+ul, ol {
+	list-style: none;
+}
+
+img {
+	border: 0;
+}
+
+.cr {
+	clear: both;
+	margin: 0;
+	padding: 0;
+	overflow: hidden
+}
+
+.margin-bm20 {
+	margin-bottom: 20px
+}
+
+body {
+	margin: 0 auto;
+}
+
+.content {
+	background: url(../../images/234936-1311160U61624.jpg) no-repeat center
+		95px;
+	margin: 0 auto;
+	background-size: cover
+}
+
+#login {
+	width: 950px;
+	margin: 0 auto;
+}
+
+#login_header {
+	text-align:center;
+	margin: 30px 0px 5px 10px;
+}
+
+.login_logo {
+	text-align:center;
+	margin: 30px 0px 5px 10px;
+}
+
+.navList {
+	float: right;
+	display: block;
+	overflow: hidden;
+	padding: 55px 5px 0 28px
+}
+
+.navList li {
+	float: left;
+	display: block;
+	margin-left: -1px;
+	padding: 0 15px;
+	border-right: 1px solid #262626;
+}
+
+.navList a {
+	display: block;
+	white-space: nowrap;
+	color: #262626;
+	line-height: 12px;
+	text-decoration: none;
+}
+
+.navList a:hover, .helpList a:hover, .loginForm .forget a:hover {
+	color: #d20038;
+}
+
+#login_content {
+	padding-top: 70px;
+}
+
+.login_title {
+	display: block;
+	padding: 25px 0 0 38px;
+}
+
+.loginForm {
+	width: 392px;
+	background-color: rgba(0, 0, 0, 0.498039);
+	float: right
+}
+
+.loginForm h2 {
+	font-size: 18px;
+	font-weight: 100;
+	color: #fff;
+	margin-top: 40px;
+	text-align: center;
+}
+
+.loginForm form {
+	padding: 25px;
+}
+
+.loginForm p {
+	position: relative
+}
+
+.loginForm label {
+	position: absolute;
+	right: 0
+}
+
+.loginForm label.loginId-icon {
+	background: url(image/icon-login.png) no-repeat center -7px;
+	width: 26px;
+	height: 26px;
+	position: absolute;
+	right: 10px;
+	top: 10px
+}
+
+.loginForm label.loginPass-icon {
+	background: url(image/icon-login.png) no-repeat center -58px;
+	width: 26px;
+	height: 26px;
+	position: absolute;
+	right: 10px;
+	top: 10px
+}
+
+.loginForm .login_input {
+	filter: alpha(opacity = 100);
+	opacity: 1;
+	border: 1px solid #bcbcbb;
+	width: 295px;
+	padding: 10px 30px 8px 15px;
+	height: 26px;
+	line-height: 26px
+}
+
+.loginForm .code {
+	float: left;
+	width: 70px;
+	margin-right: 5px;
+}
+
+.loginForm .sub {
+	display: block;
+	width: 342px;
+	height: 44px;
+	line-height: 44px;
+	font-size: 16px;
+	color: #fff;
+	border: none;
+	background: #2b7de1;
+	cursor: pointer;
+	margin: 40px auto;
+	border-radius: 4px;
+}
+
+.loginForm .forget {
+	text-align: right;
+	line-height: 20px;
+	margin-top: 15px
+}
+
+.loginForm .forget span {
+	padding-left: 15px
+}
+
+.loginForm .forget a {
+	color: #262626
+}
+
+.helpList {
+	float: right;
+	width: 200px;
+}
+
+.helpList li {
+	display: block;
+	padding-left: 10px;
+	background: url(../default/images/login_list.png) no-repeat 0 -40px;
+}
+
+.helpList a {
+	line-height: 21px;
+	color: #333;
+	text-decoration: none;
+}
+
+.login_inner {
+	float: left;
+	width: 520px;
+	text-align: center;
+}
+
+.login_inner p {
+	margin: 10px 0;
+	line-height: 150%;
+	font-size: 16px;
+	color: #fff;
+}
+
+#login_footer {
+	clear: both;
+	margin-top: 290px;
+	padding: 25px 0;
+	text-align: center;
+	background-color: rgba(0, 0, 0, 0.498039)
+}
+
+#login_footer p {
+	color: #fff;
+	padding: 20px 0;
+	width: 950px;
+	margin: 0 auto
+}

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+    <context:component-scan base-package="link.x86.wx.web" />
+	<context:component-scan base-package="link.x86.wx.map" /> 
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:/jdbc.properties" />
+	</bean>
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		 <property name="removeAbandoned" value="true"/>    
+          <property name="initialSize" value="10" />    
+          <property name="maxIdle" value="10" />    
+          <property name="minIdle" value="10" />    
+           <property name="maxActive" value="30" />    
+           <property name="maxWait" value="30000" />    
+           <property name= "testWhileIdle" value="true" />    
+        <property name= "testOnBorrow" value="false" />    
+        <property name= "testOnReturn" value="false" />    
+        <property name= "validationQuery" value="select 1" />    
+        <!-- <property name= "validationQueryTimeout" value="1" /> 配置已失效-->    
+        <property name= "timeBetweenEvictionRunsMillis" value="30000" />    
+        <property name= "numTestsPerEvictionRun" value="30" />    
+        <property name="minEvictableIdleTimeMillis" value="1800000" />    
+	</bean>
+	
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		 <property name="dataSource" ref="dataSource" /> 
+		 
+		 <property name="annotatedClasses">
+            <list>
+                <value>link.x86.wx.map.entity.EmployeeCheckinData</value>
+            </list>
+        </property> 
+ 
+         <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.show.sql">true</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+            </props>
+        </property> 
+<!-- 		<property name="configLocation" value="classpath:hibernate.cfg.xml"></property>
+ -->		
+	</bean>
+
+
+	
+
+	<!-- 配置事务管理器 -->
+	<bean id="transaction" class="org.springframework.orm.hibernate3.HibernateTransactionManager" >
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+</beans>

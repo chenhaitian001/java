@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--suppress ALL -->
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
+	<filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <display-name>Archetype Created Web Application</display-name>
+	<context-param> 
+		<param-name>contextConfigLocation</param-name> 
+		<!-- 应用上下文配置文件 --> 
+		<param-value>/WEB-INF/spring-servlet.xml</param-value> 
+	</context-param>
+	<listener> 
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener> 
+	
+	<!-- 配置spring核心servlet --> 
+	<servlet> 
+		<servlet-name>spring</servlet-name> 
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class> 
+		<load-on-startup>1</load-on-startup> 
+	</servlet>
+	 <!-- Spring配置文件 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:applicationContext.xml</param-value>
+	</context-param>
+	<!-- url-pattern配置为*.do，不影响静态文件的访问；如果不带文件后缀，会造成其它静态文件(js，css等)不能访问 -->
+	<servlet-mapping> 
+		<servlet-name>spring</servlet-name> 
+		<url-pattern>*.do</url-pattern> 
+	</servlet-mapping>
+
+    <listener>
+        <listener-class>link.x86.wx.init.InitServletListener</listener-class>
+    </listener>
+
+    <servlet>
+        <servlet-name>wxevent</servlet-name>
+        <servlet-class>link.x86.wx.web.WXEventServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>ifhistory</servlet-name>
+        <servlet-class>link.x86.wx.web.IFHistoryServlet</servlet-class>
+    </servlet>
+	<servlet>
+        <servlet-name>mapresearch</servlet-name>
+        <servlet-class>link.x86.wx.web.MAPresearchServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>wxevent</servlet-name>
+        <url-pattern>/wxevent</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet-mapping>
+        <servlet-name>ifhistory</servlet-name>
+        <url-pattern>/ifhistory</url-pattern>
+    </servlet-mapping>
+	<servlet-mapping>
+        <servlet-name>mapresearch</servlet-name>
+        <url-pattern>/mapresearch</url-pattern>
+    </servlet-mapping>
+
+</web-app>
